@@ -13,6 +13,10 @@ module.exports = {
 				.setRequired(true)),
 	async execute(interaction) {
 		const userId = interaction.user.id;
+		if (verified_userids[userId]) {
+			await interaction.reply('You are already verified!');
+			return;
+		}
 		const to = interaction.options.getString('email');
 		if (to.endsWith('@queensu.ca')) {
 			const code = randomCode();
