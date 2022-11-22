@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, Role } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 
 const roles = {
 	MATH111: '1019041204375138366',
