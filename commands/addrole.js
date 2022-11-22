@@ -1,5 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
 
+const roles = {
+	MATH111: '1019041204375138366',
+};
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('addrole')
@@ -12,7 +16,7 @@ module.exports = {
 	async execute(interaction) {
 		const userId = interaction.user.id;
 		const email = global.verified_userids[userId];
-		const subject = interaction.options.getString('subject');
+		const subject = interaction.options.getString('subject').toUpperCase();
 		if (!email) {
 			await interaction.reply('You are not verified, use \"/begin\"!');
 			return;
@@ -23,7 +27,7 @@ module.exports = {
 			return;
 		}
 		if (list[email]) {
-			//add role
+			interaction.member.roles.add(roles[subject]);
 			await interaction.reply(`Added role for ${subject}.`);
 			return;
 		}
