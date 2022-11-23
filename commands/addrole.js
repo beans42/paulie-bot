@@ -19,19 +19,19 @@ module.exports = {
 		const subject = interaction.options.getString('subject').toUpperCase();
 		
 		if (!email) {
-			await interaction.reply('You are not verified, use \"/begin\"!');
+			await interaction.reply({ content: 'You are not verified, use \"/begin\"!', ephemeral: true });
 			return;
 		}
 		
 		const list = global.class_lists[subject];
 		if (!list) {
-			await interaction.reply(`Invalid subject: ${subject}, ask for manual verification.`);
+			await interaction.reply({ content: `Invalid subject: ${subject}, ask for manual verification.`, ephemeral: true });
 			return;
 		}
 		
 		const student = list[email];
 		if (!student && student.role !== 'Student') {
-			await interaction.reply(`You were not found in the classlist for ${subject}`);
+			await interaction.reply({ content: `You were not found in the classlist for ${subject}`, ephemeral: true });
 			return;
 		}
 		
@@ -50,6 +50,6 @@ module.exports = {
 			interaction.member.setNickname(student.name);
 		}
 		
-		await interaction.reply(out_message);
+		await interaction.reply({ content: out_message, ephemeral: true });
 	}
 };

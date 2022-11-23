@@ -14,7 +14,7 @@ module.exports = {
 	async execute(interaction) {
 		const userId = interaction.user.id;
 		if (verified_userids[userId]) {
-			await interaction.reply('You are already verified!');
+			await interaction.reply({ content: 'You are already verified!', ephemeral: true });
 			return;
 		}
 		const to = interaction.options.getString('email');
@@ -22,9 +22,9 @@ module.exports = {
 			const code = randomCode();
 			global.open_verifications[userId] = { email: to, code };
 			await global.sendEmail(to, code);
-			await interaction.reply('Sent email, please enter 5 digit code with \"/verify\".');
+			await interaction.reply({ content: 'Sent email, please enter 5 digit code with \"/verify\".', ephemeral: true });
 		} else {
-			await interaction.reply('Must be official Queen\'s University email.');
+			await interaction.reply({ content: 'Must be official Queen\'s University email.', ephemeral: true });
 		}
 	}
 };

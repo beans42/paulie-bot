@@ -19,9 +19,9 @@ module.exports = {
 			delete global.open_verifications[userId];
 			//add verified role
 			interaction.member.roles.add(VERIFIED_ROLE_ID);
-			await interaction.reply('Verified, you can now add roles with \"/addrole\"!');
+			await interaction.reply({ content: 'Verified, you can now add roles with \"/addrole\"!', ephemeral: true });
 		} else {
-			await interaction.reply('Invalid email or code!');
+			await interaction.reply({ content: 'Invalid email or code!', ephemeral: true });
 		}
 	}
 };
